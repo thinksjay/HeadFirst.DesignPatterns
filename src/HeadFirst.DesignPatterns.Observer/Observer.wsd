@@ -1,0 +1,106 @@
+@startuml
+title Observer Pattern
+namespace HeadFirst.DesignPatterns{
+    note as ObserverDefine
+    <b>观察者模式</b>
+    定义了对象之间的一对多依赖，
+    这样一来，当一个对象改变状态时，
+    它的所有依赖都会收到通知并自动更新。
+
+    <b>OO 原则</b>
+    为交互对象之间的松耦合设计而努力
+
+    <b>要点</b>
+    *观察者模式定义了对象之间一对多的关系
+    *主题用一个共同的接口来更新观察者
+    *观察者和主题之间用松耦合的方式结合，主题不知道观察者的细节，只知道观察者实现了观察者接口。
+    *使用此模式时，你可以从主题处推(push)或拉(pull)数据(然而，推的方式被认为更合理)
+    *有多个观察者时，不可以依赖特定的通知次序
+    end note
+    WeatherData .down.|> ISubject
+    ISubject --right> IObserver:观察者
+    CurrentConditionsDisplay -up-> ISubject:主题
+    CurrentConditionsDisplay .up.|> IObserver
+    ForecastDisplay .up.|> IObserver
+    HeatIndexDisplay .up.|> IObserver
+    StatisticsDisplay .up.|> IObserver
+    CurrentConditionsDisplay .up.|> IDisplayElement
+    ForecastDisplay .up.|> IDisplayElement
+    HeatIndexDisplay .up.|> IDisplayElement
+    StatisticsDisplay .up.|> IDisplayElement
+
+    interface ISubject
+    {
+        + void RegisterObserver(Observer o)
+        + void RemoveObserver(Observer o)
+        + void NotifyObservers()
+    }
+    class WeatherData
+    {
+        - ArrayList<IObserver> observers
+        - float temperature
+        - float humidity
+        - float pressure
+
+        + float Temperature
+        + float Humidity
+        + float Pressure
+
+        + WeatherData()
+        + void RegisterObserver(IObserver o)
+        + void RemoveObserver(IObserver o)
+        + void NotifyObservers()
+
+        + void MeasurementsChanged()
+        + void SetMeasurements(float temperature, float humidity, float pressure)
+    }
+    interface IObserver
+    {
+        + void Update(float temperature,float humidity,float pressure)
+    }
+    interface IDisplayElement
+    {
+        + void Display()
+    }
+    class CurrentConditionsDisplay
+    {
+        - float _temperature
+        - float _humidity
+        - Subject _weatherData
+
+        + CurrentConditionsDisplay(ISubject weatherData)
+        + void Update(float temperature,float humidity,float pressure)
+        + void Display()
+    }
+    class ForecastDisplay
+    {
+        - float _temperature
+        - float _humidity
+        - Subject _weatherData
+
+        + ForecastDisplay()
+        + void Update(float temperature,float humidity,float pressure)
+        + void Display()
+    }
+    class HeatIndexDisplay
+    {
+        - float _temperature
+        - float _humidity
+        - Subject _weatherData
+
+        + HeatIndexDisplay()
+        + void Update(float temperature,float humidity,float pressure)
+        + void Display()
+    }
+    class StatisticsDisplay
+    {
+        - float _temperature
+        - float _humidity
+        - Subject _weatherData
+
+        + StatisticsDisplay()
+        + void Update(float temperature,float humidity,float pressure)
+        + void Display()
+    }
+}
+@enduml

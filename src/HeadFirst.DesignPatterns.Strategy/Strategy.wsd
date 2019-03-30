@@ -1,0 +1,111 @@
+@startuml
+title Strategy Pattern
+namespace HeadFirst.DesignPatterns{
+    note as StrategyDefine
+    <b>策略模式</b>
+    定义了算法族，分别封装起来，
+    让它们之间可以互相替换，
+    此模式让算法的变化独立于使用算法的客户
+
+    <b>OO 原则</b>
+    封装变化
+    多用组合，少用继承
+    针对接口编程，不针对实现编程
+
+    <b>要点</b>
+    *知道OO基础，并不是以让你设计出良好的OOk系统
+    *良好的OO设计必须具备可复用、可扩充、可维护三个特性
+    *模式可以让我们建造出具有良好OO设计质量的系统
+    *模式被认为是历经验证的OO设计经验
+    *模式不是代码，而是针对设计问题的通用解决方案。你可把它们应用到特定的应用中。
+    *模式不是被发明，而是被发现。
+    *大多数的模式和原则，都着眼于软件变化的主题
+    *大多数的模式都允许系统局部改变独立于其它部分
+    *我们常系统中会变化的部分抽出来封装。
+    *模式让开发人员之间有共享的语言，能够最大化沟通的价值
+    end note
+
+    Duck -up-> IFlyBehavior
+    Duck -up-> IQuackBehavior
+    MallardDuck -up-> Duck
+    RedHeadDuck -up-|> Duck
+    RubberDuck -up-|> Duck
+    DecoyDuck -up-|> Duck
+    ModelDuck -up-|> Duck
+    FlyWithWings .down.|> IFlyBehavior
+    FlyNoWay .down.|> IFlyBehavior
+    FlyRocketPowered .down.|> IFlyBehavior
+    Quack .up.|> IQuackBehavior
+    Squeak  .up.|> IQuackBehavior
+    MuteQuack .up.|> IQuackBehavior
+    FakeQuack .up.|> IQuackBehavior
+
+     abstract class Duck
+    {
+        - IFlyBehavior _flyBehavior
+        - IQuackBehavior _quackBehavior
+        + void Swim()
+        + void PerformQuack()
+        + void PerformFly()
+        + {abstract} void Display()
+        + void SetFlyBehavior(IFlyBehavior flyBehavior)
+        + void SetQuackBehavior(IQuackBehavior quackBehavior)
+    }
+    class MallardDuck
+    {
+        + void Display()
+    }
+    class RedHeadDuck
+    {
+        + void Display()
+    }
+    class RubberDuck
+    {
+       + void Display()
+    }
+    class DecoyDuck
+    {
+        + void Display()
+    }
+    class ModelDuck
+    {
+        + void Display()
+    }
+    interface IFlyBehavior
+    {
+        + void Fly()
+    }
+    class FlyWithWings
+    {
+        + void Fly()
+    }
+    class FlyRocketPowered
+    {
+        + void Fly()
+    }
+    class FlyNoWay
+    {
+        + void Fly()
+    }
+    interface IQuackBehavior
+    {
+        + void Quack()
+    }
+    class Quack
+    {
+        + void Quack()
+    }
+    class Squeak
+    {
+        + void Quack()
+    }
+    class MuteQuack
+    {
+        + void Quack()
+    }
+    class FakeQuack
+    {
+        + void Quack()
+    }
+}
+@enduml
