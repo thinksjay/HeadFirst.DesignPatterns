@@ -18,5 +18,6 @@
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Strategy\HeadFirst.DesignPatterns.Strategy.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Observer\HeadFirst.DesignPatterns.Observer.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Decorator\HeadFirst.DesignPatterns.Decorator.csproj" />
+    <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Factory\HeadFirst.DesignPatterns.Factory.csproj" />
   </ItemGroup>
 </Project>

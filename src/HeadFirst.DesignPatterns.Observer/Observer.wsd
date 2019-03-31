@@ -18,8 +18,11 @@ namespace HeadFirst.DesignPatterns{
     *有多个观察者时，不可以依赖特定的通知次序
     end note
     WeatherData .down.|> ISubject
-    ISubject --right> IObserver:观察者
+    ISubject -right-> IObserver:观察者
     CurrentConditionsDisplay -up-> ISubject:主题
+    ForecastDisplay -up-> ISubject:主题
+    HeatIndexDisplay -up-> ISubject:主题
+    StatisticsDisplay -up-> ISubject:主题
     CurrentConditionsDisplay .up.|> IObserver
     ForecastDisplay .up.|> IObserver
     HeatIndexDisplay .up.|> IObserver
@@ -35,6 +38,7 @@ namespace HeadFirst.DesignPatterns{
         + void RemoveObserver(Observer o)
         + void NotifyObservers()
     }
+    note left of ISubject:这是我们的主题接口
     class WeatherData
     {
         - ArrayList<IObserver> observers
@@ -54,14 +58,17 @@ namespace HeadFirst.DesignPatterns{
         + void MeasurementsChanged()
         + void SetMeasurements(float temperature, float humidity, float pressure)
     }
+    note top of WeatherData:具体主题
     interface IObserver
     {
         + void Update(float temperature,float humidity,float pressure)
     }
+    note top of IObserver:所有观察者都实现此观察者接口\n这样主题在需要通知观察者时，\n有了一个共同的接口
     interface IDisplayElement
     {
         + void Display()
     }
+    note left of IDisplayElement:布告板接口
     class CurrentConditionsDisplay
     {
         - float _temperature
@@ -102,5 +109,12 @@ namespace HeadFirst.DesignPatterns{
         + void Update(float temperature,float humidity,float pressure)
         + void Display()
     }
+    note as DisplaysNote
+    各种布告板
+    end note
+    DisplaysNote .up. CurrentConditionsDisplay
+    DisplaysNote .up. ForecastDisplay
+    DisplaysNote .up. HeatIndexDisplay
+    DisplaysNote .up. StatisticsDisplay
 }
 @enduml

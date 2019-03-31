@@ -38,7 +38,7 @@ namespace HeadFirst.DesignPatterns.Decorator{
     Espresso -up-|> Beverage
     Decaf -up-|> Beverage
     CondimentDecorator -up-|> Beverage
-    CondimentDecorator -up-> Beverage
+    CondimentDecorator -up-> Beverage:组合
     Milk -up-|> CondimentDecorator
     Mocha -up-|> CondimentDecorator
     Soy -up-|> CondimentDecorator
@@ -67,10 +67,18 @@ namespace HeadFirst.DesignPatterns.Decorator{
     {
         + decimal Cost()
     }
+    note as CoffaasNote
+    各种咖啡
+    end note
+    CoffaasNote .up. HouseBlend
+    CoffaasNote .up. DarkRoast
+    CoffaasNote .up. Espresso
+    CoffaasNote .up. Decaf
     abstract class CondimentDecorator
     {
         + {abstract} string GetDescription()
     }
+    note right of CondimentDecorator: 我们将要动态加上新行为的对象，相当于抽象的Component类
     class Milk
     {
         + string GetDescription()
@@ -87,5 +95,13 @@ namespace HeadFirst.DesignPatterns.Decorator{
     {
         + string GetDescription()
     }
+    note as SeasoningsNote
+    这是调料装饰者，它们除了必须实现Cost()之外，
+    还必须实现GetDesciption()
+    end note
+    SeasoningsNote .up. Milk
+    SeasoningsNote .up. Mocha
+    SeasoningsNote .up. Soy
+    SeasoningsNote .up. Whip
 }
 @enduml

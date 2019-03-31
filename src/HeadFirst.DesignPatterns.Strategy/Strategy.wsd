@@ -24,88 +24,110 @@ namespace HeadFirst.DesignPatterns{
     *我们常系统中会变化的部分抽出来封装。
     *模式让开发人员之间有共享的语言，能够最大化沟通的价值
     end note
-
-    Duck -up-> IFlyBehavior
-    Duck -up-> IQuackBehavior
-    MallardDuck -up-> Duck
-    RedHeadDuck -up-|> Duck
-    RubberDuck -up-|> Duck
-    DecoyDuck -up-|> Duck
-    ModelDuck -up-|> Duck
-    FlyWithWings .down.|> IFlyBehavior
-    FlyNoWay .down.|> IFlyBehavior
-    FlyRocketPowered .down.|> IFlyBehavior
-    Quack .up.|> IQuackBehavior
-    Squeak  .up.|> IQuackBehavior
-    MuteQuack .up.|> IQuackBehavior
-    FakeQuack .up.|> IQuackBehavior
-
-     abstract class Duck
-    {
-        - IFlyBehavior _flyBehavior
-        - IQuackBehavior _quackBehavior
-        + void Swim()
-        + void PerformQuack()
-        + void PerformFly()
-        + {abstract} void Display()
-        + void SetFlyBehavior(IFlyBehavior flyBehavior)
-        + void SetQuackBehavior(IQuackBehavior quackBehavior)
+    rectangle 客户{
+        MallardDuck -up-|> Duck
+        RedHeadDuck -up-|> Duck
+        RubberDuck -up-|> Duck
+        DecoyDuck -up-|> Duck
+        ModelDuck -up-|> Duck
+        abstract class Duck
+        {
+            - IFlyBehavior _flyBehavior
+            - IQuackBehavior _quackBehavior
+            + void Swim()
+            + void PerformQuack()
+            + void PerformFly()
+            + {abstract} void Display()
+            + void SetFlyBehavior(IFlyBehavior flyBehavior)
+            + void SetQuackBehavior(IQuackBehavior quackBehavior)
+        }
+        class MallardDuck
+        {
+            + void Display()
+        }
+        class RedHeadDuck
+        {
+            + void Display()
+        }
+        class RubberDuck
+        {
+            + void Display()
+        }
+        class DecoyDuck
+        {
+            + void Display()
+        }
+        class ModelDuck
+        {
+            + void Display()
+        }
     }
-    class MallardDuck
-    {
-        + void Display()
+    rectangle 封装飞行行为{
+        Duck -up-> IFlyBehavior
+        FlyWithWings .down.|> IFlyBehavior
+        FlyNoWay .down.|> IFlyBehavior
+        FlyRocketPowered .down.|> IFlyBehavior
+        interface IFlyBehavior
+        {
+            + void Fly()
+        }
+        class FlyWithWings
+        {
+            + void Fly()
+        }
+        class FlyRocketPowered
+        {
+            + void Fly()
+        }
+        class FlyNoWay
+        {
+            + void Fly()
+        }
+        note as FlysNote
+        这些“算法”是可以互换的
+        end note
+        FlysNote .. FlyWithWings
+        FlysNote .. FlyRocketPowered
+        FlysNote .. FlyNoWay
     }
-    class RedHeadDuck
-    {
-        + void Display()
+    rectangle 封装呱呱叫行为{
+        Duck -up-> IQuackBehavior
+        Quack .down.|> IQuackBehavior
+        Squeak  .down.|> IQuackBehavior
+        MuteQuack .down.|> IQuackBehavior
+        FakeQuack .down.|> IQuackBehavior
+        interface IQuackBehavior
+        {
+            + void Quack()
+        }
+        class Quack
+        {
+            + void Quack()
+        }
+        class Squeak
+        {
+            + void Quack()
+        }
+        class MuteQuack
+        {
+            + void Quack()
+        }
+        class FakeQuack
+        {
+            + void Quack()
+        }
+        note as QuacksNote
+        这些“算法”是可以互换的
+        end note
+        QuacksNote .. Quack
+        QuacksNote .. Squeak
+        QuacksNote .. MuteQuack
+        QuacksNote .. FakeQuack
     }
-    class RubberDuck
-    {
-       + void Display()
-    }
-    class DecoyDuck
-    {
-        + void Display()
-    }
-    class ModelDuck
-    {
-        + void Display()
-    }
-    interface IFlyBehavior
-    {
-        + void Fly()
-    }
-    class FlyWithWings
-    {
-        + void Fly()
-    }
-    class FlyRocketPowered
-    {
-        + void Fly()
-    }
-    class FlyNoWay
-    {
-        + void Fly()
-    }
-    interface IQuackBehavior
-    {
-        + void Quack()
-    }
-    class Quack
-    {
-        + void Quack()
-    }
-    class Squeak
-    {
-        + void Quack()
-    }
-    class MuteQuack
-    {
-        + void Quack()
-    }
-    class FakeQuack
-    {
-        + void Quack()
-    }
+    note as AlgorithmGroupNote
+    把每组行为想象成一个算法族
+    end note
+    AlgorithmGroupNote .. 封装呱呱叫行为
+    AlgorithmGroupNote .. 封装飞行行为
 }
 @enduml

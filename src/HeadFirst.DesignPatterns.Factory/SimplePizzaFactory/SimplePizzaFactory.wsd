@@ -1,0 +1,75 @@
+@startuml
+title Simple Pizza Factory
+namespace HeadFirst.DesignPatterns.Factory{
+    SimplePizzaFactory -> Pizza
+    PizzaStore -> SimplePizzaFactory
+    CheesePizza -up-> Pizza
+    VeggiePizza -up-> Pizza
+    ClamPizza -up-> Pizza
+    PepperoniPizza -up-> Pizza
+
+    note as Factory
+    <b>简单工厂</b>
+    简单工厂其实不是一个设计模式，
+    而是一种编程习惯
+    end note
+    note top of  PizzaStore
+    这是工厂的“客户”，PizzaStore现在通过
+    SimplePizzaFactory取得比萨的实例
+    end note
+    note top of SimplePizzaFactory
+    这是创建比萨的“工厂”，它应该是我们
+    的应用中唯一用到具体比萨类的地方
+    end note
+    note top of Pizza
+    这是工厂的“产品”：比萨
+    把Pizza定义为抽象类，
+    具有一些有用的实现，
+    这些实现可以被覆盖
+    end note
+    note as PizzaChildNote
+    这是我们的“具体产品”，每个产品
+    都必需实现Pizza接口并设计成一个具体类。
+    这样一来，就可以被工厂创建并返回给客户
+    end note
+    PizzaChildNote .up. CheesePizza
+    PizzaChildNote .up. VeggiePizza
+    PizzaChildNote .up. ClamPizza
+    PizzaChildNote .up. PepperoniPizza
+    abstract class Pizza
+    {
+        # string name
+        # string dough
+        # string sauce
+        # List<string> toppings
+        + Prepare()
+        + Bake()
+        + Cut()
+        + Box()
+    }
+    class SimplePizzaFactory
+    {
+        + CreatePizza()
+    }
+    class PizzaStore
+    {
+        OrderPizza()
+    }
+    class CheesePizza
+    {
+
+    }
+    class VeggiePizza
+    {
+
+    }
+    class ClamPizza
+    {
+
+    }
+    class PepperoniPizza
+    {
+
+    }
+}
+@enduml
