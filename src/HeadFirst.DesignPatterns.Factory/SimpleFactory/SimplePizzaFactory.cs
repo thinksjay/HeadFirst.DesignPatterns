@@ -1,4 +1,4 @@
-namespace HeadFirst.DesignPatterns.Factory.SimplePizzaFactory
+namespace HeadFirst.DesignPatterns.Factory.SimpleFactory
 {
     public class SimplePizzaFactory
     {

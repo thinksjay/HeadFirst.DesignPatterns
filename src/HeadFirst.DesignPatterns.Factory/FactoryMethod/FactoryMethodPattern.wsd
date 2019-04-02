@@ -1,0 +1,103 @@
+@startuml
+title Factory Method Pattern
+namespace HeaderFirst.DesignPatterns.Factory{
+    note as FactoryMethod
+    <b>工厂方法模式</b>
+    定义一个创建对象的接口，但由子类决定要实例化的类是哪一个。
+    工厂方法让类把实例化推迟到子类
+
+    <b>OO 原则</b>
+    要依赖抽象，不要依赖具体类
+    end note
+
+    ChicagoPizzaStore -up-|> PizzaStore
+    NYPizzaStore -up-|> PizzaStore
+    ChicagoPizzaStore -right-> PizzaType
+    NYPizzaStore -left-> PizzaType
+    ChicagoPizzaStore --> ChicagoStyleCheesePizza
+    ChicagoPizzaStore --> ChicagoStyleClamPizza
+    ChicagoPizzaStore --> ChicagoStylePepperoniPizza
+    ChicagoPizzaStore --> ChicagoStyleVeggiePizza
+    NYPizzaStore --> NYStyleCheesePizza
+    NYPizzaStore --> NYStyleClamPizza
+    NYPizzaStore --> NYStylePepperoniPizza
+    NYPizzaStore --> NYStyleVeggiePizza
+    ChicagoStyleCheesePizza -down-|> Pizza
+    ChicagoStyleClamPizza -down-|> Pizza
+    ChicagoStylePepperoniPizza -down-|> Pizza
+    ChicagoStyleVeggiePizza -down-|> Pizza
+    NYStyleCheesePizza -down-|> Pizza
+    NYStyleClamPizza -down-|> Pizza
+    NYStylePepperoniPizza -down-|> Pizza
+    NYStyleVeggiePizza -down-|> Pizza
+
+    abstract class PizzaStore
+    {
+        + {abstract} Pizza CreatePizza(PizzaType pizzaType);
+        + Pizza OrderPizza(PizzaType pizzaType)
+    }
+    class ChicagoPizzaStore
+    {
+        + Pizza CreatePizza(PizzaType pizzaType);
+    }
+    note left of ChicagoPizzaStore:封芝加哥约风味的比萨
+    class NYPizzaStore
+    {
+        + Pizza CreatePizza(PizzaType pizzaType);
+    }
+    note right of NYPizzaStore:封装纽约风味的比萨
+    abstract class Pizza
+    {
+        + string Name
+        + string Dough
+        + string Sauce
+        + List<string> Toppings
+
+        + void Prepare()
+        + virtual void Bake()
+        + virtual void Cut()
+        + virtual void Box()
+    }
+
+    class ChicagoStyleCheesePizza
+    {
+
+    }
+    class ChicagoStyleClamPizza
+    {
+
+    }
+    class ChicagoStylePepperoniPizza
+    {
+
+    }
+    class ChicagoStyleVeggiePizza
+    {
+
+    }
+    class NYStyleCheesePizza
+    {
+
+    }
+    class NYStyleClamPizza
+    {
+
+    }
+    class NYStylePepperoniPizza
+    {
+
+    }
+    class NYStyleVeggiePizza
+    {
+
+    }
+
+    enum PizzaType
+    {
+        Cheese
+        Pepperoni
+        Clam
+        Veggie
+    }
+}
+@enduml

@@ -1,7 +1,8 @@
 using System;
 using Xunit;
 using HeadFirst.DesignPatterns.Factory;
-using HeadFirst.DesignPatterns.Factory.SimplePizzaFactory;
+using SF=HeadFirst.DesignPatterns.Factory.SimpleFactory;
+using FM=HeadFirst.DesignPatterns.Factory.FactoryMethod;
 using Xunit.Abstractions;
 
 namespace HeadFirst.DesignPatterns.Tests
@@ -15,12 +16,12 @@ namespace HeadFirst.DesignPatterns.Tests
         }
 
         [Fact]
-        public void SimplePizzaFactoryTest()
+        public void SimpleFactoryPatternTest()
         {
-            SimplePizzaFactory factory = new SimplePizzaFactory();
-            PizzaStore store = new PizzaStore(factory);
+            SF.SimplePizzaFactory factory = new SF.SimplePizzaFactory();
+            SF.PizzaStore store = new SF.PizzaStore(factory);
 
-            Pizza pizza = store.OrderPizza(PizzaType.Cheese);
+            SF.Pizza pizza = store.OrderPizza(PizzaType.Cheese);
 
             Console.WriteLine($"We ordered a {pizza.Name}{Environment.NewLine}");
             Console.WriteLine(pizza.ToString());
@@ -28,6 +29,37 @@ namespace HeadFirst.DesignPatterns.Tests
             pizza = store.OrderPizza(PizzaType.Veggie);
             Console.WriteLine("We ordered a {pizza.Name}{Environment.NewLine}");
             Console.WriteLine(pizza.ToString());
+        }
+
+        [Fact]
+        public void FactoryMethodPatternTest()
+        {
+            FM.PizzaStore nyStore = new FM.NYPizzaStore();
+            FM.PizzaStore chicagoStore = new FM.ChicagoPizzaStore();
+
+            FM.Pizza pizza = nyStore.OrderPizza(PizzaType.Cheese);
+            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Cheese);
+            Console.WriteLine($"Joel ordered a {pizza.Name}\n");
+
+            pizza = nyStore.OrderPizza(PizzaType.Clam);
+            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Clam);
+            Console.WriteLine($"Joel ordered a {pizza.Name}\n");
+
+            pizza = nyStore.OrderPizza(PizzaType.Pepperoni);
+            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Pepperoni);
+           Console.WriteLine($"Joel ordered a {pizza.Name}\n");
+
+            pizza = nyStore.OrderPizza(PizzaType.Veggie);
+            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Veggie);
+            Console.WriteLine($"Joel ordered a {pizza.Name}\n");
         }
     }
 }

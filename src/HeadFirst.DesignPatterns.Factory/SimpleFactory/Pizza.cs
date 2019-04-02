@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 
-namespace HeadFirst.DesignPatterns.Factory.SimplePizzaFactory
+namespace HeadFirst.DesignPatterns.Factory.SimpleFactory
 {
     public abstract class Pizza
     {
