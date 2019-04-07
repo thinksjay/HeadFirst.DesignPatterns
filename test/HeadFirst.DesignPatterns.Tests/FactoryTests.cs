@@ -1,8 +1,9 @@
 using System;
 using Xunit;
 using HeadFirst.DesignPatterns.Factory;
-using SF=HeadFirst.DesignPatterns.Factory.SimpleFactory;
-using FM=HeadFirst.DesignPatterns.Factory.FactoryMethod;
+using SF = HeadFirst.DesignPatterns.Factory.SimpleFactory;
+using FM = HeadFirst.DesignPatterns.Factory.FactoryMethod;
+using AF = HeadFirst.DesignPatterns.Factory.AbstractFactory;
 using Xunit.Abstractions;
 
 namespace HeadFirst.DesignPatterns.Tests
@@ -38,28 +39,59 @@ namespace HeadFirst.DesignPatterns.Tests
             FM.PizzaStore chicagoStore = new FM.ChicagoPizzaStore();
 
             FM.Pizza pizza = nyStore.OrderPizza(PizzaType.Cheese);
-            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+            Console.WriteLine($"Ethan ordered a {pizza.Name}{Environment.NewLine}");
 
             pizza = chicagoStore.OrderPizza(PizzaType.Cheese);
-            Console.WriteLine($"Joel ordered a {pizza.Name}\n");
+            Console.WriteLine($"Joel ordered a {pizza.Name}{Environment.NewLine}");
 
             pizza = nyStore.OrderPizza(PizzaType.Clam);
-            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+            Console.WriteLine($"Ethan ordered a {pizza.Name}{Environment.NewLine}");
 
             pizza = chicagoStore.OrderPizza(PizzaType.Clam);
-            Console.WriteLine($"Joel ordered a {pizza.Name}\n");
+            Console.WriteLine($"Joel ordered a {pizza.Name}{Environment.NewLine}");
 
             pizza = nyStore.OrderPizza(PizzaType.Pepperoni);
-            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+            Console.WriteLine($"Ethan ordered a {pizza.Name}{Environment.NewLine}");
 
             pizza = chicagoStore.OrderPizza(PizzaType.Pepperoni);
-           Console.WriteLine($"Joel ordered a {pizza.Name}\n");
+            Console.WriteLine($"Joel ordered a {pizza.Name}{Environment.NewLine}");
 
             pizza = nyStore.OrderPizza(PizzaType.Veggie);
-            Console.WriteLine($"Ethan ordered a {pizza.Name}\n");
+            Console.WriteLine($"Ethan ordered a {pizza.Name}{Environment.NewLine}");
 
             pizza = chicagoStore.OrderPizza(PizzaType.Veggie);
-            Console.WriteLine($"Joel ordered a {pizza.Name}\n");
+            Console.WriteLine($"Joel ordered a {pizza.Name}{Environment.NewLine}");
+        }
+
+        [Fact]
+        public void AbstractFactoryPatternTest()
+        {
+            AF.PizzaStore nyStore = new AF.NYPizzaStore();
+            AF.PizzaStore chicagoStore = new AF.ChicagoPizzaStore();
+
+            AF.Pizza pizza = nyStore.OrderPizza(PizzaType.Cheese);
+            Console.WriteLine($"Ethan ordered a {pizza}{Environment.NewLine}");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Cheese);
+            Console.WriteLine($"Joel ordered a {pizza}{Environment.NewLine}");
+
+            pizza = nyStore.OrderPizza(PizzaType.Clam);
+            Console.WriteLine($"Ethan ordered a {pizza}{Environment.NewLine}");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Clam);
+            Console.WriteLine($"Joel ordered a {pizza}{Environment.NewLine}");
+
+            pizza = nyStore.OrderPizza(PizzaType.Pepperoni);
+            Console.WriteLine($"Ethan ordered a {pizza}{Environment.NewLine}");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Pepperoni);
+            Console.WriteLine($"Joel ordered a {pizza}{Environment.NewLine}");
+
+            pizza = nyStore.OrderPizza(PizzaType.Veggie);
+            Console.WriteLine($"Ethan ordered a {pizza}{Environment.NewLine}");
+
+            pizza = chicagoStore.OrderPizza(PizzaType.Veggie);
+            Console.WriteLine($"Joel ordered a {pizza}{Environment.NewLine}");
         }
     }
 }

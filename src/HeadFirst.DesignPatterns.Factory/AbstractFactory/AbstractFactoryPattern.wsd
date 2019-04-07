@@ -1,0 +1,191 @@
+@startuml
+title Abstract Factory Pattern
+namespace HeadFirst.DesignPatterns.Factory.AbstractFactory{
+    note as AbstractFactory
+    <b>抽象工厂模式</b>
+    提供一个接口，用于创建相关或依赖对象的家族，
+    而不需要明确指定具体类
+
+    <b>要点</b>
+    *所有的工厂都是用来封装对象的创建
+    *简单工厂虽然不是真正的设计模式，
+     但仍不失为一个简单的方法，可以将客户
+     程序从具体类解耦
+    *工厂方法使用继承，把对象的创建委托给
+     子类，子类实现工厂方法来创建对象
+    *抽象工厂使用对象组合，对象的创建被实现
+     在工厂接口所暴露出来的方法中。
+    *所有工厂模式都通过减少应用程序各具体类
+     之间的依赖促进松耦合
+    *工厂方法允许类将实例化延迟到子类进行
+    *抽象工厂创建相关的对象家族，
+     而不需要依赖它们的具体类
+    *依赖倒置原则，指导我们避免具体类型，
+     而要尽量依赖抽象
+    *工厂是很有威力的技巧，帮助我们针对抽象
+     编程，而不要针对具体类
+    end note
+    
+    NYPizzaIngredientFactory .up.|> IPizzaIngredientFactory
+    ChicagoPizzaIngredientFactory .up.|> IPizzaIngredientFactory
+    ChicagoPizzaStore -up-|> PizzaStore
+    NYPizzaStore -up-|> PizzaStore
+    MozzarellaCheese .up.|> ICheese
+    ReggianoCheese .up.|> ICheese
+    FreshClams .up.|> IClams
+    FrozenClams .up.|> IClams
+    ThickCrustDough .up.|> IDough
+    ThinCrustDough .up.|> IDough
+    SlicedPepperoni .up.|> IPepperoni
+    MarinaraSauce .up.|> ISauce
+    PlumTomatoSauce .up.|> ISauce
+    BlackOlives .up.|> IVeggies
+    Eggplant .up.|> IVeggies
+    Garlic .up.|> IVeggies
+    Mushroom .up.|> IVeggies
+    Onion .up.|> IVeggies
+    RedPepper .up.|> IVeggies
+    Spinach .up.|> IVeggies
+    NYPizzaStore ..> ICheese
+    NYPizzaStore ..> IClams
+    NYPizzaStore ..> IDough
+    NYPizzaStore ..> IPepperoni
+    NYPizzaStore ..> ISauce
+    NYPizzaStore ..> IVeggies
+    NYPizzaStore ..> IPizzaIngredientFactory
+    ChicagoPizzaStore ..> ICheese
+    ChicagoPizzaStore ..> IClams
+    ChicagoPizzaStore ..> IDough
+    ChicagoPizzaStore ..> IPepperoni
+    ChicagoPizzaStore ..> ISauce
+    ChicagoPizzaStore ..> IVeggies
+    ChicagoPizzaStore ..> IPizzaIngredientFactory
+
+    interface IPizzaIngredientFactory {
+        + Dough CreateDough();
+        + Sauce CreateSauce();
+        + Cheese CreateCheese();
+        + Veggies[] CreateVeggies();
+        + Pepperoni CreatePepperoni();
+        + Clams CreateClam();
+    }
+
+    note as PizzaIngredientFactoryNote
+    这是抽象的比萨原料工厂接口,
+    它定义了如何 产生一个相关产品
+    的家族,这个家族包含了所有
+    制作比萨的原料
+    end note
+
+    PizzaIngredientFactoryNote -- IPizzaIngredientFactory
+    class NYPizzaIngredientFactory {
+        + Dough CreateDough();
+        + Sauce CreateSauce();
+        + Cheese CreateCheese();
+        + Veggies[] CreateVeggies();
+        + Pepperoni CreatePepperoni();
+        + Clams CreateClam();
+    }
+    class ChicagoPizzaIngredientFactory {
+        + Dough CreateDough();
+        + Sauce CreateSauce();
+        + Cheese CreateCheese();
+        + Veggies[] CreateVeggies();
+        + Pepperoni CreatePepperoni();
+        + Clams CreateClam();
+    }
+    note as FactoriesNote
+    这些具体比萨工厂负责生产比萨原料,
+    每个工厂都知道如何产生符合自己区域
+    的正确对象
+    end note
+    FactoriesNote .up. NYPizzaIngredientFactory
+    FactoriesNote .up. ChicagoPizzaIngredientFactory
+
+    abstract class PizzaStore{
+        # {abstract} Pizza CreatePizza(PizzaType pizzaType);
+        + Pizza OrderPizza(PizzaType pizzaType)
+    }
+    class NYPizzaStore{
+        + Pizza CreatePizza(PizzaType pizzaType);
+    }
+    class ChicagoPizzaStore{
+        + Pizza CreatePizza(PizzaType pizzaType);
+    }
+    note as StoresNote
+    比萨店的两个具体实例，
+    是抽象工厂的客户
+    end note
+    StoresNote .right. NYPizzaStore
+    StoresNote .. ChicagoPizzaStore
+
+    interface ICheese{
+        + string ToString()
+    }
+    class MozzarellaCheese{
+        + string ToString()
+    }
+    class ReggianoCheese{
+        + string ToString()
+    }
+    interface IClams{
+        + string ToString()
+    }
+    class FreshClams{
+        + string ToString()
+    }
+    class FrozenClams{
+        + string ToString()
+    }
+    interface IDough{
+        + string ToString()
+    }
+    class ThickCrustDough{
+        + string ToString()
+    }
+    class ThinCrustDough{
+        + string ToString()
+    }
+    interface IPepperoni{
+        + string ToString()
+    }
+    class SlicedPepperoni{
+        + string ToString()
+    }
+    interface ISauce{
+        + string ToString()
+    }
+    class MarinaraSauce{
+        + string ToString()
+    }
+    class PlumTomatoSauce{
+        + string ToString()
+    }
+
+    interface IVeggies{
+        + string ToString()
+    }
+
+    class BlackOlives {
+        + string ToString()
+    }
+    class Eggplant{
+        + string ToString()
+    }
+    class Garlic{
+        + string ToString()
+    }
+    class Mushroom{
+        + string ToString()
+    }
+    class Onion{
+        + string ToString()
+    }
+    class RedPepper{
+        + string ToString()
+    }
+    class Spinach{
+        + string ToString()
+    }
+}
+@enduml
