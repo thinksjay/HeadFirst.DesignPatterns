@@ -1,7 +1,7 @@
 @startuml
 title Decorator Pattern
 namespace HeadFirst.DesignPatterns.Decorator{
-    note as Decorator
+    note as DecoratorPatternDefine
     <b>装饰者模式</b>
     动态地将责任附加到对象上。
     若要扩展功能，

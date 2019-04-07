@@ -1,7 +1,7 @@
 @startuml
 title Strategy Pattern
 namespace HeadFirst.DesignPatterns{
-    note as StrategyDefine
+    note as StrategyPatternDefine
     <b>策略模式</b>
     定义了算法族，分别封装起来，
     让它们之间可以互相替换，

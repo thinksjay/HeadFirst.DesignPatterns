@@ -1,7 +1,7 @@
 @startuml
 title Simple Pizza Factory
 namespace HeadFirst.DesignPatterns.Factory{
-    note as SimpleFactory
+    note as SimpleFactoryDefine
     <b>简单工厂</b>
     简单工厂其实不是一个设计模式，
     而是一种编程习惯

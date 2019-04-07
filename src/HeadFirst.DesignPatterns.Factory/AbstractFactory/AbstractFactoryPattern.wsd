@@ -1,7 +1,7 @@
 @startuml
 title Abstract Factory Pattern
 namespace HeadFirst.DesignPatterns.Factory.AbstractFactory{
-    note as AbstractFactory
+    note as AbstractFactoryPatternDefine
     <b>抽象工厂模式</b>
     提供一个接口，用于创建相关或依赖对象的家族，
     而不需要明确指定具体类

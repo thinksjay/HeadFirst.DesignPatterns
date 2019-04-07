@@ -1,7 +1,7 @@
 @startuml
 title Factory Method Pattern
 namespace HeaderFirst.DesignPatterns.Factory{
-    note as FactoryMethod
+    note as FactoryMethodPatternDefine
     <b>工厂方法模式</b>
     定义一个创建对象的接口，但由子类决定要实例化的类是哪一个。
     工厂方法让类把实例化推迟到子类

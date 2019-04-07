@@ -1,0 +1,22 @@
+@startuml
+title Singleton Pattern
+namespace HeadFirst.DesignPatterns.Singleton{
+    note as SingletonPatternDefine
+    <b>单件模式</b>
+    确保一个类只有一个实例，并提供一个全局访问点。
+
+    <b>要点</b>
+    *单件模式确保程序中一个类最多只有一个实例
+    *单件模式也提供访问这个实例的全局点
+    *在c#中实现单件模式需要私有的构造器、一个
+     静态方法和一个静态变量
+    *确定在性能和资源上的限制，然后小心地
+     选择适当的方案来实现单件，以解决多线程问题
+    end note
+
+    class Singleton{
+        - static Singleton _uniqueInstace;
+        + static Singleton GetInstace();
+    }
+}
+@enduml
