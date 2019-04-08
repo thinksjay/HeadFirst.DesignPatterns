@@ -1,3 +1,4 @@
+
 namespace HeadFirst.DesignPatterns.Singleton.ThreadSafe
 {
     public class Singleton
