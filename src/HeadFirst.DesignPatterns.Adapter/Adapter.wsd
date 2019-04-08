@@ -1,0 +1,29 @@
+﻿@startuml
+title Adapter Pattern
+namespace HeadFirst.DesignPatterns.Adapter{
+    note as AdapterPatternDefine
+    <b>适配器模式</b>
+    将一个类的接口，转换成客户期望的另一个接口。
+    适配器让原本接口不兼容的类可以合作无间。
+    end note
+    Client -right-> ITarget
+    Adapter .up.|>  ITarget
+    Adapter -right-> Adaptee
+    class Client{
+
+    }
+    note top of Client:客户只看到目标接口
+    interface ITarget{
+        + void Request()
+    }
+    note right of ITarget:适配器实现目标接口
+    class Adapter{
+        + void Request()
+    }
+    note left of Adapter:适配器与被适配者组合
+    class Adaptee{
+        + void SpecificRequest()
+    }
+    note right of Adaptee:所有的请求都委托给被适配者
+}
+@enduml
