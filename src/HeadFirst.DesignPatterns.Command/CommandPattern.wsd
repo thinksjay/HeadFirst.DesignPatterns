@@ -52,6 +52,48 @@ namespace HeadFirst.DesignPatterns.Command{
     TVOffCommand ..> TV
     TVOnCommand ..> TV
     RemoteControl ..>ICommand
+    note as RemoteControlNote
+    管理一组命令对象，每个按钮都有一个命令对象。
+    每当按下按钮，就调用相应的**ButtonWasPushed()方法，
+    间接造成命令的Execute()方法被调用。
+    end note
+    RemoteControlNote .. RemoteControl
+    note as ICommandNote
+    所有的遥控器命令都实现这个ICommand接口，此接口中包含了
+    一个方法，也就是Execute(),命令封装了某个特定厂商类的一组
+    动作，遥控器可以通过调用Execute()方法，执行这些动作。
+    end note
+    ICommandNote .right. ICommand
+    note as CommandsNote
+    利用ICommand接口，每个动作都被实现成一个简单的命令对象。
+    命令对象持有对一个厂商类的实例的引用，并实现了一个Execute()
+    方法。这个方法会调用厂商类实例的一个或多个方法，完成特定的行为。
+    在这个例子中，有两个类，分别打开电灯与关闭电灯。
+    end note
+    CeilingFanHighCommand .. CommandsNote
+    CeilingFanMediumCommand .. CommandsNote
+    CeilingFanOffCommand .. CommandsNote
+    HottubOffCommand .. CommandsNote
+    HottubOnCommand .. CommandsNote
+    LightOffCommand .. CommandsNote
+    LightOnCommand .. CommandsNote
+    LivingroomLightOffCommand .. CommandsNote
+    LivingroomLightOnCommand .. CommandsNote
+    MacroCommand .. CommandsNote
+    NoCommand .. CommandsNote
+    StereoOffCommand .. CommandsNote
+    StereoOnCommand .. CommandsNote
+    StereoOnWithCDCommand .. CommandsNote
+    TVOffCommand .. CommandsNote
+    TVOnCommand .. CommandsNote
+    note as ManufacturersNote
+    这些厂商类被用来控制特定的家电自动化装置。
+    end note
+    ManufacturersNote .up. CeilingFan
+    ManufacturersNote .up. Hottub
+    ManufacturersNote .up. Light
+    ManufacturersNote .up. Stereo
+    ManufacturersNote .up. TV
     interface ICommand
     {
         + void Execute();
