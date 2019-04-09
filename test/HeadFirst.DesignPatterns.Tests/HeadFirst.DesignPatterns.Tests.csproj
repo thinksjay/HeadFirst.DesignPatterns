@@ -22,6 +22,6 @@
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Singleton\HeadFirst.DesignPatterns.Singleton.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Command\HeadFirst.DesignPatterns.Command.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Adapter\HeadFirst.DesignPatterns.Adapter.csproj" />
-    
+    <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Facade\HeadFirst.DesignPatterns.Facade.csproj" />
   </ItemGroup>
 </Project>

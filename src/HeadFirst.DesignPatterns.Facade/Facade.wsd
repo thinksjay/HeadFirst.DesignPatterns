@@ -1,0 +1,198 @@
+﻿@startuml
+title Facade Pattern
+namespace HeadFirst.DesignPatterns.Facade{
+    note as FacadePatternDefin
+    <b>外观模式</b>
+    提供了一个统一的接口，用来访问子系统中的一群接口。
+    外观定义了一个高层接口，让子系统更容易使用
+
+    <b>OO 原则</b>
+    最少知识原则：只和你的密码谈话
+
+    <b>要点</b>
+    *当需要使用一个现有的类而其接口并不符合你的需要时，
+    就使用适配器
+    *当需要简化并统一一个很大的接口或者一群复杂的接口时，
+    使用外观
+    *适配器改变接口以符合客户的期望
+    *外观将客户从一个复杂的子系统中解耦
+    *实现一个适配器可能需要一番功夫，也可能不费功夫，
+    视目标接口的大小与复杂度而定
+    *实现一个外观，需要将子系统组合进外观中，
+    然后将工作委托给子系统执行
+    *适配器模式有两种形式：对象适配器和类适配器。
+    类适配器需要用到多重继承。
+    *你可以为一个子系统实现一个以上的外观。
+    *适配器将一个对象包装起来以改变其接口;
+    装饰者将一个对旬包装起来以增加新的行为和责任;
+    而外观将一群对象“包装”起来以简化其接口。
+    end note
+
+    Client --> HomeTheaterFacade
+    HomeTheaterFacade --> Amplifier
+    HomeTheaterFacade --> CdPlayer
+    HomeTheaterFacade --> DvdPlayer
+    HomeTheaterFacade --> PopcornPopper
+    HomeTheaterFacade --> Projector
+    HomeTheaterFacade --> Screen
+    HomeTheaterFacade --> TheaterLights
+    HomeTheaterFacade --> Tuner
+
+    class Client{
+
+    }
+    note as ClientNote
+    这个客户只有一个朋友，也就是HomeTheaterFacade。
+    在OO编程中，“只有一个朋友”是件好事情！
+    end note
+    ClientNote .. Client
+    class HomeTheaterFacade{
+        - Amplifier _amp;
+        - Tuner _tuner;
+        - DvdPlayer _dvd;
+        - CdPlayer _cd;
+        - Projector _projector;
+        - TheaterLights _lights;
+        - Screen _screen;
+        - PopcornPopper _popper;
+
+        + HomeTheaterFacade(Amplifier amp,Tuner tuner,DvdPlayer dvd,CdPlayer cd,Projector projector,Screen screen,TheaterLights lights,PopcornPopper popper)
+        + void WatchMovie(string movie)
+        + void EndMovie()
+        + void ListenToCd(String cdTitle)
+        + void EndCd()
+        + void ListenToRadio(double frequency)
+        + void EndRadio()
+    }
+
+    note as HomeTheaterFacadeNote
+    这个HomeTheaterFacade帮助客户管理全部子系统组件，
+    它的存在让客户变得简单又有弹性
+    end note
+    HomeTheaterFacadeNote .right. HomeTheaterFacade
+    class Amplifier
+    {
+        - string _description;
+        - Tuner _tuner;
+        - DvdPlayer _dvd;
+        - CdPlayer _cd;
+
+        + Amplifier(string description)
+        + void On()
+        + void Off()
+        + void SetStereoSound()
+        + void SetSurroundSound()
+        + void SetVolume(int level)
+        + void SetTuner(Tuner tuner)
+        + void SetDvd(DvdPlayer dvd)
+        + void SetCd(CdPlayer cd)
+    }
+
+    class CdPlayer
+    {
+        - string _description;
+        - int _currentTrack;
+        - Amplifier _amplifier;
+        - string _title;
+
+        + CdPlayer(string description, Amplifier amplifier)
+        + void On()
+        + void Off()
+        + void Eject()
+        + void Play(String title)
+        + void Play(int track)
+        + void Stop()
+        + void Pause()
+    }
+
+    class DvdPlayer
+    {
+        - string _description;
+        - int _currentTrack;
+        - Amplifier _amplifier;
+        - string _movie;
+
+        + DvdPlayer(String description, Amplifier amplifier)
+        + void On()
+        + void Off()
+        + void Eject()
+        + void Play(String movie)
+        + void Play(int track)
+        + void Stop()
+        + void Pause()
+        + void SetTwoChannelAudio()
+        + void SetSurroundAudio()
+    }
+
+    class PopcornPopper
+    {
+        - string _description;
+
+        + PopcornPopper(string description)
+        + void On()
+        + void Off()
+        + void Pop()
+    }
+
+    class Projector
+    {
+        - string _description;
+        - DvdPlayer _dvdPlayer;
+
+        + Projector(String description, DvdPlayer dvdPlayer)
+        + void On()
+        + void Off()
+        + void WideScreenMode()
+        + void TvMode()
+    }
+
+    class Screen
+    {
+        - string _description;
+
+        + Screen(string description)
+        + void Up()
+        + void Down()
+    }
+
+    class TheaterLights
+    {
+        - string _description;
+
+        + TheaterLights(string description)
+        + void On()
+        + void Off()
+        + void Dim(int level)
+    }
+
+    class Tuner
+    {
+        - string _description;
+        - Amplifier _amplifier;
+        - double _frequency;
+
+        + Tuner(string description, Amplifier amplifier)
+        + void On()
+        + void Off()
+        + void SetFrequency(double frequency)
+        + void SetAm()
+        + void SetFm()
+    }
+
+    note as ChildrenNote
+    我们可以在不影响客户的情况下升级家庭影院的这些组件。
+    我们试着让子系统也能遵守最少知识原则。
+    如果变得太复杂，有太多朋友牵涉其中，那么我们可以增加
+    更多的外观，将此子系统分成几个层次
+    end note
+
+    ChildrenNote .up. Amplifier
+    ChildrenNote .up. CdPlayer
+    ChildrenNote .up. DvdPlayer
+    ChildrenNote .up. PopcornPopper
+    ChildrenNote .up. Projector
+    ChildrenNote .up. Screen
+    ChildrenNote .up. TheaterLights
+    ChildrenNote .up. Tuner
+}
+@enduml
