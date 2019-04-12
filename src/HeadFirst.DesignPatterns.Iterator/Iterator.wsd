@@ -1,0 +1,119 @@
+@startuml
+title Iterator Pattern
+namespace HeadFirst.DesignPatterns.Iterator{
+    note as IteratorPatternDefine
+    <b>迭代器模式</b>
+    提供一种方法顺序访问一个聚合对象中的各个元素，
+    而又不暴露其内部的表示。
+
+    <b>OO 原则</b>
+    一个类应该只有一个引起变化的原因
+
+    <b>要点</b>
+    end note
+}
+
+CafeMenuIterator .up.|> IIterator
+DinnerMenuIterator .up.|> IIterator
+PancakeHouseIterator .up.|> IIterator
+
+CafeMenu .up.|> IMenu
+DinnerMenu .up.|> IMenu
+PancakeHouseMenu .up.|> IMenu
+
+Waitress --> IIterator
+Waitress --> IMenu
+
+interface IIterator
+{
+    bool HasNext();
+    object Next();
+}
+note as IIteratorNote
+我们将客户端从菜单的实现中解耦了，
+所以现在我们可以利用迭代器来遍历菜单项，
+而无需知道菜单项列表是如何被实现的
+end note
+IIterator .right. IIteratorNote
+interface IMenu
+{
+    IIterator CreateIterator();
+}
+
+note as IMenuNote
+菜单接口
+end note
+IMenu .right. IMenuNote
+class CafeMenu
+{
+    - Hashtable _menuItems = new Hashtable();
+
+    + void AddItem(string name, string description,
+    bool isVegetarian, double price, int index)
+
+    + IIterator CreateIterator()
+}
+class CafeMenuIterator
+{
+    - Hashtable _menuItems = new Hashtable();
+    - int _position = 1;
+
+    + CafeMenuIterator(Hashtable menuItems)
+    + bool HasNext()
+    + object Next()
+}
+class DinnerMenu
+{
+    + const int MAX_ITEMS = 6;
+    - int _numberOfItems = 0;
+    - readonly MenuItem[] _menuItems;
+
+    + void AddItem(string name, string description,
+    bool isVegetarian, double price)
+
+    + IIterator CreateIterator()
+}
+class DinnerMenuIterator
+{
+    - readonly MenuItem[] _items;
+    - int _position = 0;
+
+    + DinnerMenuIterator(MenuItem[] items)
+
+    + bool HasNext()
+    + object Next()
+}
+class PancakeHouseMenu
+{
+    - readonly ArrayList _menuItems;
+
+    + void AddItem(string name, string description,
+    bool isVegetarian, double price)
+
+    + IIterator CreateIterator()
+}
+class PancakeHouseIterator
+{
+    - readonly ArrayList _menuItems;
+    - int _position = 0;
+
+    + PancakeHouseIterator(ArrayList menuItems)
+    + bool HasNext()
+    + object Next()
+}
+class Waitress
+{
+    - readonly IMenu _pancakeHouseMenu;
+    - readonly IMenu _dinnerMenu;
+    - readonly IMenu _cafeMenu;
+
+    + Waitress(IMenu pancakeHouseMenu, IMenu dinnerMenu, IMenu cafeMenu)
+
+    + string PrintMenu()
+    + string PrintMenu(IIterator iterator)
+}
+note as WaitressNote
+现在，客户端只需要关心菜单和迭代器这两个接口
+end note
+Waitress .up. WaitressNote
+@enduml
