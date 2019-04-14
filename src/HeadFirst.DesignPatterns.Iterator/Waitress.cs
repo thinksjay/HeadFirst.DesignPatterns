@@ -6,13 +6,13 @@ namespace HeadFirst.DesignPatterns.Iterator
     public class Waitress
     {
         private readonly IMenu _pancakeHouseMenu;
-        private readonly IMenu _dinnerMenu;
+        private readonly IMenu _dinerMenu;
         private readonly IMenu _cafeMenu;
 
-        public Waitress(IMenu pancakeHouseMenu, IMenu dinnerMenu, IMenu cafeMenu)
+        public Waitress(IMenu pancakeHouseMenu, IMenu dinerMenu, IMenu cafeMenu)
         {
             _pancakeHouseMenu = pancakeHouseMenu;
-            _dinnerMenu = dinnerMenu;
+            _dinerMenu = dinerMenu;
             _cafeMenu = cafeMenu;
         }
 
@@ -22,7 +22,7 @@ namespace HeadFirst.DesignPatterns.Iterator
 
             IIterator pancakeIterator = _pancakeHouseMenu.CreateIterator();
 
-            IIterator dinnerIterator = _dinnerMenu.CreateIterator();
+            IIterator dinnerIterator = _dinerMenu.CreateIterator();
 
             IIterator cafeIterator = _cafeMenu.CreateIterator();
 
@@ -57,6 +57,58 @@ namespace HeadFirst.DesignPatterns.Iterator
             }
 
             return sb.ToString();
+        }
+
+        public void printVegetarianMenu()
+        {
+            printVegetarianMenu(_pancakeHouseMenu.CreateIterator());
+            printVegetarianMenu(_dinerMenu.CreateIterator());
+        }
+
+        public bool isItemVegetarian(String name)
+        {
+            IIterator breakfastIterator = _pancakeHouseMenu.CreateIterator();
+            if (isVegetarian(name, breakfastIterator))
+            {
+                return true;
+            }
+            IIterator dinnerIterator = _dinerMenu.CreateIterator();
+            if (isVegetarian(name, dinnerIterator))
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        private void printVegetarianMenu(IIterator iterator)
+        {
+            while (iterator.HasNext())
+            {
+                MenuItem menuItem = iterator.Next() as MenuItem;
+                if (menuItem.IsVegetarian)
+                {
+                    Console.WriteLine(menuItem.Name);
+                    Console.WriteLine("\t\t" + menuItem.Price);
+                    Console.WriteLine("\t" + menuItem.Description);
+                }
+            }
+        }
+
+        private bool isVegetarian(String name, IIterator iterator)
+        {
+            while (iterator.HasNext())
+            {
+                MenuItem menuItem = iterator.Next() as MenuItem;
+                if (menuItem.Name.Equals(name))
+                {
+                    if (menuItem.IsVegetarian)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

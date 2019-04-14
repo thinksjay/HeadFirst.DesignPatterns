@@ -1,11 +1,11 @@
 namespace HeadFirst.DesignPatterns.Iterator
 {
-    public class DinnerMenuIterator : IIterator
+    public class DinerMenuIterator : IIterator
     {
         private readonly MenuItem[] _items;
         private int _position = 0;
 
-        public DinnerMenuIterator(MenuItem[] items)
+        public DinerMenuIterator(MenuItem[] items)
         {
             _items = items;
         }

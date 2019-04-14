@@ -1,0 +1,102 @@
+@startuml
+title Composite Pattern
+namespace HeadFirst.DesignPatterns.Composite{
+    note as CompositePatternDefine
+    <b>组合模式</b>
+    允许你将对象组合成树形结构来表现“整体/部分”层次结构。
+    组合能让客户以一致的方式处理个别对象以及对象组合。
+
+    <b>OO 原则</b>
+    类应该只有一个改变的理由
+
+    <b>要点</b>
+    *迭代器允许访问聚合的元素，而不需要暴露它的内部结构
+    *迭代器将遍历聚合的工作封装进一个对象中
+    *当使用迭代器的时候，我们依赖聚合提供遍历。
+    *迭代器提供了一个通用的接口，让我们遍历聚合的项，
+    当我们编码使用聚合的项时，就可以使用多态机制。
+    *我们应该努力让一个类只分配一个责任。
+    *组合模式提供一个结构，可同时包容个别对象和组合对象。
+    *组合模式允许客户对个别对象以组合对象一视同仁。
+    *组合结构内的任意对象称为组件，组件可以是组合，也可以是叶节点。
+    *在实现组合模式时，有许多设计上的折衷。你要根据需要平衡透明性和安全性。
+    end note
+
+    Menu -up-|>MenuComponent
+    MenuItem -up-|>MenuComponent
+    Waitress -left-> MenuComponent
+
+    abstract class MenuComponent
+    {
+        + virtual void Add(MenuComponent menuComponent)
+        + virtual void Remove(MenuComponent menuComponent)
+        + virtual MenuComponent GetChild(int i)
+        + virtual string GetName()
+        + virtual string GetDescription()
+        + virtual double GetPrice()
+        + virtual bool IsVegetarian()
+        + virtual void Print()
+    }
+
+    note as MenuComponentNote
+    菜单组件提供了一个接口，让菜单项和菜单共同使用。
+    因为我们希望能够为这些方法提供默认的实现，所以
+    我们在这里使用了一个抽象类。
+    end note
+
+    MenuComponentNote .right. MenuComponent
+
+    class Menu
+    {
+        - readonly ArrayList _menuComponents;
+        - string _name;
+        - string _description;
+
+        + Menu(string name,string description)
+        + override void Add(MenuComponent menuComponent)
+        + override void Remove(MenuComponent menuComponent)
+        + override MenuComponent GetChild(int i);
+        + override string GetName();
+        + override string GetDescription()
+        + override void Print()
+    }
+
+    note as MenuNote
+    菜单也覆盖了一些对它有意义的方法。
+    end note
+    MenuNote .left. Menu
+
+    class MenuItem
+    {
+        - string _name;
+        - string _description;
+        - bool _isVegetarian;
+        - double _price;
+
+        + MenuItem(string name,string description,bool isVegetarian,double price)
+        + override string GetName()
+        + override string GetDescription()
+        + override double GetPrice()
+        + override bool IsVegetarian()
+        + override void Print()
+    }
+    note as MenuItemNote
+    菜单项覆盖了这些对它有意义的方法。至于那些没有意义的方法，
+    就置之不理。
+    end note
+    MenuItemNote .right. MenuItem
+
+    class Waitress
+    {
+        - readonly MenuComponent _allMenus;
+
+        + Waitress(MenuComponent allMenus)
+
+        + void PrintMenu()
+    }
+    note as WaitressNote
+    客户端将使用菜单组件接口访问菜单和菜单项。
+    end note
+    WaitressNote .left. Waitress
+}
+@enduml

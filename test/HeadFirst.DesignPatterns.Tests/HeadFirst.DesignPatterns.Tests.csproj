@@ -23,5 +23,8 @@
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Command\HeadFirst.DesignPatterns.Command.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Adapter\HeadFirst.DesignPatterns.Adapter.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Facade\HeadFirst.DesignPatterns.Facade.csproj" />
+    <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.TemplateMethod\HeadFirst.DesignPatterns.TemplateMethod.csproj" />
+    <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Iterator\HeadFirst.DesignPatterns.Iterator.csproj" />
+    <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Composite\HeadFirst.DesignPatterns.Composite.csproj" />
   </ItemGroup>
 </Project>

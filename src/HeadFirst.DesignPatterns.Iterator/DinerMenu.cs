@@ -2,14 +2,14 @@ using System;
 
 namespace HeadFirst.DesignPatterns.Iterator
 {
-    public class DinnerMenu : IMenu
+    public class DinerMenu : IMenu
     {
        public const int MAX_ITEMS = 6;
        private int _numberOfItems = 0;
 
         private readonly MenuItem[] _menuItems;
 
-        public DinnerMenu()
+        public DinerMenu()
         {
             _menuItems = new MenuItem[MAX_ITEMS];
 
@@ -57,7 +57,7 @@ namespace HeadFirst.DesignPatterns.Iterator
 
         public IIterator CreateIterator()
         {
-            return new DinnerMenuIterator(_menuItems);
+            return new DinerMenuIterator(_menuItems);
         }
     }
 }

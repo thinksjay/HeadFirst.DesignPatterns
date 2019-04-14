@@ -8,8 +8,6 @@ namespace HeadFirst.DesignPatterns.Iterator{
 
     <b>OO 原则</b>
     一个类应该只有一个引起变化的原因
-
-    <b>要点</b>
     end note
 }
 
