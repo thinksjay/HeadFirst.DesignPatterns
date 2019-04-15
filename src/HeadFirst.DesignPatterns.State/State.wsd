@@ -1,0 +1,130 @@
+@startuml
+title State Pattern
+namespace HeadFirst.DesignPatterns.State{
+    note as StatePatternDefind
+    <b>状态模式</b>
+    允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它的类。
+    end note
+    GumballMachine --> IState
+    HasQuarterState .up.|> IState
+    NoQuarterState .up.|> IState
+    SoldOutState .up.|> IState
+    SoldState .up.|> IState
+    WinnerState .up.|> IState
+
+    class GumballMachine
+    {
+        + int Count
+        + IState CurrentState
+        + IState SoldOutState
+        + IState NoQuarterState
+        + IState HasQuarterState
+        + IState SoldState
+        + IState WinnerState
+
+        + GumballMachine(int numberGumballs)
+
+        + void InsertQuarter()
+        + void EjectQuarter()
+        + void TurnCrank()
+        + void SetState(IState state)
+        + void ReleaseBall()
+        + void Refill(int count)
+    }
+
+    note as GumballMachineNote
+    Context（上下文）是一个类，这可以拥有一些内部状态。
+    end note
+    GumballMachineNote .left. GumballMachine
+
+    interface IState
+    {
+        void InsertQuarter();
+        void EjectQuarter();
+        void TurnCrank();
+        void Dispense();
+        void Refill();
+    }
+
+    note as IStateNote
+    Istate接口定义了一个所有具体状态的共同接口;
+    任何状态都实现这个相同的接口，
+    这样一来，状态之间可以互相替换
+    end note
+    IStateNote .right. IState
+    class HasQuarterState
+    {
+        - readonly GumballMachine _gumballMachine;
+
+        + HasQuarterState(GumballMachine gumballMachine)
+
+        + void InsertQuarter()
+        + void EjectQuarter()
+        + void TurnCrank()
+        + void Dispense()
+        + void Refill()
+    }
+
+    class NoQuarterState
+    {
+        - readonly GumballMachine _gumballMachine;
+
+        + NoQuarterState(GumballMachine gumballMachine)
+
+        + void Dispense()
+        + void EjectQuarter()
+        + void InsertQuarter()
+        + void Refill()
+        + void TurnCrank()
+    }
+
+    class SoldOutState
+    {
+        - readonly GumballMachine _gumballMachine;
+
+        + SoldOutState(GumballMachine gumballMachine)
+
+        + void Dispense()
+        + void EjectQuarter()
+        + void InsertQuarter()
+        + void Refill()
+        + void TurnCrank()
+    }
+
+    class SoldState
+    {
+        - readonly GumballMachine _gumballMachine;
+
+        + SoldState(GumballMachine gumballMachine)
+
+        + void Dispense()
+        + void EjectQuarter()
+        + void InsertQuarter()
+        + void Refill()
+        + void TurnCrank()
+    }
+
+    class WinnerState
+    {
+        - readonly GumballMachine _gumballMachine;
+
+        + WinnerState(GumballMachine gumballMachine)
+
+        + void Dispense()
+        + void EjectQuarter()
+        + void InsertQuarter()
+        + void Refill()
+        + void TurnCrank()
+    }
+    note as StatesNote
+    具体状态，处理来自Context的请求。
+    每一个具体状态都提供了它自己对于请求的实现。
+    所以当Context改变状态时行为也跟着改变。
+    end note
+    HasQuarterState .. StatesNote
+    NoQuarterState .. StatesNote
+    SoldOutState .. StatesNote
+    SoldState .. StatesNote
+    WinnerState .. StatesNote
+}
+@enduml
