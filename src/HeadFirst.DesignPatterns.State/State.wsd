@@ -4,6 +4,18 @@ namespace HeadFirst.DesignPatterns.State{
     note as StatePatternDefind
     <b>状态模式</b>
     允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它的类。
+    
+    <b>要点</b>
+    *状态模式允许一个对象基于内部状态而拥有不同的行为。
+    *和程序状态机不同，状态模式用类代表状态。
+    *Context会将行为委托给当前状态对象。
+    *通过将每个状态封装进一个类，我们把以后需要的任何改变局部化。
+    *状态模式和策略模式有相同的类图，但是它们的意图不同
+    *策略模式通常会用行为或算法来配置Centext类。
+    *状态模式允许Context随着状态的改变而改变行为。
+    *状态转换可以同State类或Context类控制。
+    *使用状态模式通常会导致设计中类的数目大量增加。
+    *状态类可以被多个Centext实例共享。
     end note
     GumballMachine --> IState
     HasQuarterState .up.|> IState
