@@ -4,8 +4,8 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class Tuner
     {
-        private string _description;
-        private Amplifier _amplifier;
+        private readonly string _description;
+        private readonly Amplifier _amplifier;
         private double _frequency;
 
         public Tuner(string description, Amplifier amplifier)

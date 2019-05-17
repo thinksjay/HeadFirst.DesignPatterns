@@ -8,9 +8,9 @@ namespace HeadFirst.DesignPatterns.Command
     //
     public class RemoteControl
     {
-        private ICommand[] _onCommands;
-        private ICommand[] _offCommands;
-        private ICommand _undoCommand;
+        private readonly ICommand[] _onCommands;
+        private readonly ICommand[] _offCommands;
+        private  ICommand _undoCommand;
 
         public RemoteControl()
         {

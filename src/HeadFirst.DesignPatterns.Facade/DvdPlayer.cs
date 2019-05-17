@@ -4,9 +4,9 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class DvdPlayer
     {
-        private string _description;
+        private readonly string _description;
         private int _currentTrack;
-        private Amplifier _amplifier;
+        private readonly Amplifier _amplifier;
         private string _movie;
 
         public DvdPlayer(String description, Amplifier amplifier)

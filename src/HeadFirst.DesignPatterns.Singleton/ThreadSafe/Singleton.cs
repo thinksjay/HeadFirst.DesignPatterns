@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Singleton.ThreadSafe
     public class Singleton
     {
         private static Singleton _instance;
-        private static object lockObj=new object();
+        private readonly static object lockObj=new object();
         private Singleton()
         {
 

@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Command
 {
     public class Stereo
     {
-        private string _location;
+        private readonly string _location;
 
         public Stereo(string location)
         {
@@ -13,12 +13,12 @@ namespace HeadFirst.DesignPatterns.Command
 
         public void On()
         {
-            Console.WriteLine("{location} stereo is on");
+            Console.WriteLine($"{_location} stereo is on");
         }
 
         public void Off()
         {
-            Console.WriteLine("{location} stereo is off");
+            Console.WriteLine($"{_location} stereo is off");
         }
 
         public void SetCD()
@@ -26,7 +26,7 @@ namespace HeadFirst.DesignPatterns.Command
             Console.WriteLine("{location} stereo is set for CD input");
         }
 
-        public void setDVD()
+        public void SetDVD()
         {
             Console.WriteLine("{location} stereo is set for DVD input");
         }

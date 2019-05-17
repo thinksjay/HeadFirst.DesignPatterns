@@ -25,6 +25,10 @@ namespace HeadFirst.DesignPatterns.Tests
             weatherData.SetMeasurements(80, 65, 30.4f);
             weatherData.SetMeasurements(82, 70, 29.2f);
             weatherData.SetMeasurements(78, 90, 29.2f);
+
+            currentDisplay.Display();
+            statisticsDisplay.Display();
+            forecastDisplay.Display();
         }
 
 
@@ -36,9 +40,15 @@ namespace HeadFirst.DesignPatterns.Tests
             StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherData);
             ForecastDisplay forecastDisplay = new ForecastDisplay(weatherData);
             HeatIndexDisplay heatIndexDisplay = new HeatIndexDisplay(weatherData);
+            
             weatherData.SetMeasurements(80, 65, 30.4f);
             weatherData.SetMeasurements(82, 70, 29.2f);
             weatherData.SetMeasurements(78, 90, 29.2f);
+
+            currentDisplay.Display();
+            statisticsDisplay.Display();
+            forecastDisplay.Display();
+            heatIndexDisplay.Display();
         }
     }
 }

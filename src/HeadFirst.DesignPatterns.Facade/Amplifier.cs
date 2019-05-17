@@ -5,7 +5,7 @@ namespace HeadFirst.DesignPatterns.Facade
 
     public class Amplifier
     {
-        private string _description;
+        private readonly string _description;
         private Tuner _tuner;
         private DvdPlayer _dvd;
         private CdPlayer _cd;
@@ -42,20 +42,21 @@ namespace HeadFirst.DesignPatterns.Facade
 
         public void SetTuner(Tuner tuner)
         {
-            Console.WriteLine($"{_description} setting tuner to {_dvd}" );
             _tuner = tuner;
+            Console.WriteLine($"{_description} setting tuner to {_dvd}");
         }
 
         public void SetDvd(DvdPlayer dvd)
         {
-            Console.WriteLine($"{_description} setting DVD player to {_dvd}" );
             _dvd = dvd;
+            Console.WriteLine($"{_description} setting DVD player to {_dvd}");
         }
 
         public void SetCd(CdPlayer cd)
         {
-            Console.WriteLine($"{_description} setting CD player to {_cd}");
             _cd = cd;
+            Console.WriteLine($"{_description} setting CD player to {_cd}");
+
         }
 
         public override string ToString()

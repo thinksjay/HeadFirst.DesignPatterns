@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class TheaterLights
     {
-        private string _description;
+        private readonly string _description;
 
         public TheaterLights(string description)
         {

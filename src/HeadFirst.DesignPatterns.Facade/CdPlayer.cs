@@ -4,9 +4,9 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class CdPlayer
     {
-        private string _description;
+        private readonly string _description;
         private int _currentTrack;
-        private Amplifier _amplifier;
+        private readonly Amplifier _amplifier;
         private string _title;
 
         public CdPlayer(string description, Amplifier amplifier)

@@ -6,7 +6,7 @@ namespace HeadFirst.DesignPatterns.Observer
     {
         private float _temperature;
         private float _humidity;
-        private ISubject _weatherData;
+        private readonly ISubject _weatherData;
 
         public CurrentConditionsDisplay(ISubject weatherData)
         {

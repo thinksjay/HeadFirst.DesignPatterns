@@ -59,21 +59,21 @@ namespace HeadFirst.DesignPatterns.Iterator
             return sb.ToString();
         }
 
-        public void printVegetarianMenu()
+        public void PrintVegetarianMenu()
         {
-            printVegetarianMenu(_pancakeHouseMenu.CreateIterator());
-            printVegetarianMenu(_dinerMenu.CreateIterator());
+            PrintVegetarianMenu(_pancakeHouseMenu.CreateIterator());
+            PrintVegetarianMenu(_dinerMenu.CreateIterator());
         }
 
-        public bool isItemVegetarian(String name)
+        public bool IsItemVegetarian(String name)
         {
             IIterator breakfastIterator = _pancakeHouseMenu.CreateIterator();
-            if (isVegetarian(name, breakfastIterator))
+            if (IsVegetarian(name, breakfastIterator))
             {
                 return true;
             }
             IIterator dinnerIterator = _dinerMenu.CreateIterator();
-            if (isVegetarian(name, dinnerIterator))
+            if (IsVegetarian(name, dinnerIterator))
             {
                 return true;
             }
@@ -81,7 +81,7 @@ namespace HeadFirst.DesignPatterns.Iterator
         }
 
 
-        private void printVegetarianMenu(IIterator iterator)
+        private void PrintVegetarianMenu(IIterator iterator)
         {
             while (iterator.HasNext())
             {
@@ -95,7 +95,7 @@ namespace HeadFirst.DesignPatterns.Iterator
             }
         }
 
-        private bool isVegetarian(String name, IIterator iterator)
+        private bool IsVegetarian(String name, IIterator iterator)
         {
             while (iterator.HasNext())
             {

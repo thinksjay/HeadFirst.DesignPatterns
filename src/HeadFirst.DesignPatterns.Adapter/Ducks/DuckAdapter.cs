@@ -5,7 +5,7 @@ namespace HeadFirst.DesignPatterns.Adapter.Ducks
     public class DuckAdapter : ITurkey
     {
         private readonly IDuck _duck;
-        private Random _rand;
+        private readonly Random _rand;
 
         public DuckAdapter(IDuck duck)
         {

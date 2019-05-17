@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class Screen
     {
-        private string _description;
+        private readonly string _description;
 
         public Screen(string description)
         {

@@ -1,0 +1,8 @@
+@startuml
+title Combining
+namespace HeadFirst.DesignPatterns.Combining{
+    note as CombiningNote
+
+    end note
+}
+@enduml

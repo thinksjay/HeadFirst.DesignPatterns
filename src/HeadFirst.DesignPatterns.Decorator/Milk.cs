@@ -3,7 +3,7 @@ namespace HeadFirst.DesignPatterns.Decorator
 {
     public class Milk : CondimentDecorator
     {
-        private Beverage _beverage;
+        private readonly Beverage _beverage;
 
         public Milk(Beverage beverage)
         {

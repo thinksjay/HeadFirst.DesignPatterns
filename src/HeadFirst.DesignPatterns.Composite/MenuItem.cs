@@ -4,11 +4,11 @@ namespace HeadFirst.DesignPatterns.Composite
 {
     public class MenuItem:MenuComponent
     {
-        private string _name;
-        private string _description;
+        private readonly string _name;
+        private readonly string _description;
 
-        private bool _isVegetarian;
-        private double _price;
+        private readonly bool _isVegetarian;
+        private readonly double _price;
 
         public MenuItem(string name,string description,bool isVegetarian,double price)
         {

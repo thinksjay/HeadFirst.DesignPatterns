@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Iterator
 {
  public class CafeMenuIterator : IIterator
     {
-        private Hashtable _menuItems = new Hashtable();
+        private readonly Hashtable _menuItems = new Hashtable();
         private int _position = 1;
 
         public CafeMenuIterator(Hashtable menuItems)

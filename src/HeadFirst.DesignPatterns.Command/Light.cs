@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Command
 {
     public class Light
     {
-        private string _location;
+        private readonly string _location;
         private int _level;
 
         public int Level { get { return _level; } }
@@ -16,13 +16,13 @@ namespace HeadFirst.DesignPatterns.Command
         public void On()
         {
             _level = 100;
-            Console.WriteLine("Light is on");
+            Console.WriteLine($"{_location} Light is on");
         }
 
         public void Off()
         {
             _level = 0;
-            Console.WriteLine("Light is off");
+            Console.WriteLine($"{_location} Light is off");
         }
 
         public void Dim(int level)
@@ -34,7 +34,7 @@ namespace HeadFirst.DesignPatterns.Command
             }
             else
             {
-                Console.WriteLine("Light is dimmed to {level}%");
+                Console.WriteLine($"Light is dimmed to {_level}%");
             }
         }
     }

@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.State
 {
     public class HasQuarterState : IState
     {
-        private Random _randomWinner=new Random(DateTime.Now.Millisecond);
+        private readonly Random _randomWinner=new Random(DateTime.Now.Millisecond);
         private readonly GumballMachine _gumballMachine;
 
         public HasQuarterState(GumballMachine gumballMachine)

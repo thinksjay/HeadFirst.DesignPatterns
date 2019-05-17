@@ -8,7 +8,7 @@ namespace HeadFirst.DesignPatterns.Observer
         private float _minTemp = 200;
         private float _tempSum = 0.0f;
         private int _numReadings;
-        private WeatherData _weatherData;
+        private readonly WeatherData _weatherData;
 
         public StatisticsDisplay(WeatherData weatherData)
         {

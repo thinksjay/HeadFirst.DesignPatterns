@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Command
 {
     public class TV
     {
-        private string _location;
+        private readonly string _location;
         private int _channel;
 
         public TV(string location)
@@ -25,7 +25,7 @@ namespace HeadFirst.DesignPatterns.Command
         public void SetInputChannel()
         {
             _channel = 3;
-            Console.WriteLine($"{_location} TV channel is set for DVD");
+            Console.WriteLine($"{_location} TV channel{_channel} is set for DVD");
         }
     }
 }

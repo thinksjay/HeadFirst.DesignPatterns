@@ -6,8 +6,8 @@ namespace HeadFirst.DesignPatterns.Composite
     public class Menu:MenuComponent
     {
         private readonly ArrayList _menuComponents;
-        private string _name;
-        private string _description;
+        private readonly string _name;
+        private readonly string _description;
 
         public Menu(string name,string description)
         {

@@ -8,7 +8,7 @@ namespace HeadFirst.DesignPatterns.Command
         public const int MEDIUM = 2;
         public const int LOW = 1;
         public const int OFF = 0;
-        private string _location;
+        private readonly string _location;
         private int _speed;
 
         public int Speed { get { return _speed; } }

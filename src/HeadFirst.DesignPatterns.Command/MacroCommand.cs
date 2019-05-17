@@ -2,7 +2,7 @@ namespace HeadFirst.DesignPatterns.Command
 {
     public class MacroCommand : ICommand
     {
-        private ICommand[] _commands;
+        private readonly ICommand[] _commands;
 
         public MacroCommand(ICommand[] commands)
         {

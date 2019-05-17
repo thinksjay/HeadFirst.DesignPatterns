@@ -3,7 +3,7 @@ namespace HeadFirst.DesignPatterns.Decorator
 {
     public class Whip : CondimentDecorator
     {
-        private Beverage _beverage;
+        private readonly Beverage _beverage;
 
         public Whip(Beverage beverage)
         {

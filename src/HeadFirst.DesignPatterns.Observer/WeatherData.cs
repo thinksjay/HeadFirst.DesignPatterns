@@ -5,7 +5,7 @@ namespace HeadFirst.DesignPatterns.Observer
 {
     public class WeatherData : ISubject
     {
-        private List<IObserver> _observers;
+        private readonly List<IObserver> _observers;
         private float _temperature;
         private float _humidity;
         private float _pressure;

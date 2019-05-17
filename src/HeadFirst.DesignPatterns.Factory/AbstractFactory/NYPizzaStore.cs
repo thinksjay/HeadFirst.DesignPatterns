@@ -11,20 +11,28 @@ namespace HeadFirst.DesignPatterns.Factory.AbstractFactory
             switch (pizzaType)
             {
                 case PizzaType.Cheese:
-                    pizza = new CheesePizza(ingredientFactory);
-                    pizza.Name = "New York Style Cheese Pizza";
+                    pizza = new CheesePizza(ingredientFactory)
+                    {
+                        Name = "New York Style Cheese Pizza"
+                    };
                     break;
                 case PizzaType.Veggie:
-                    pizza = new VeggiePizza(ingredientFactory);
-                    pizza.Name = "New York Style Veggie Pizza";
+                    pizza = new VeggiePizza(ingredientFactory)
+                    {
+                        Name = "New York Style Veggie Pizza"
+                    };
                     break;
                 case PizzaType.Clam:
-                    pizza = new ClamPizza(ingredientFactory);
-                    pizza.Name = "New York Style Clam Pizza";
+                    pizza = new ClamPizza(ingredientFactory)
+                    {
+                        Name = "New York Style Clam Pizza"
+                    };
                     break;
                 case PizzaType.Pepperoni:
-                    pizza = new PepperoniPizza(ingredientFactory);
-                    pizza.Name = "New York Style Pepperoni Pizza";
+                    pizza = new PepperoniPizza(ingredientFactory)
+                    {
+                        Name = "New York Style Pepperoni Pizza"
+                    };
                     break;
             }
 

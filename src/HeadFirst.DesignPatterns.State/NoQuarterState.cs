@@ -13,6 +13,7 @@ namespace HeadFirst.DesignPatterns.State
         public void Dispense()
         {
             Console.WriteLine("You need to pay first");
+            _gumballMachine.SetState(_gumballMachine.HasQuarterState);
         }
 
         public void EjectQuarter()

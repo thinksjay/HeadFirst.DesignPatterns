@@ -6,7 +6,7 @@ namespace HeadFirst.DesignPatterns.Observer
     {
         private float _currentPressure = 29.92f;
         private float _lastPressure;
-        private WeatherData _weatherData;
+        private readonly WeatherData _weatherData;
 
         public ForecastDisplay(WeatherData weatherData)
         {

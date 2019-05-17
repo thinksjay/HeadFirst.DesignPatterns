@@ -5,7 +5,7 @@ namespace HeadFirst.DesignPatterns.Observer
     public class HeatIndexDisplay : IObserver, IDisplayElement
     {
         float _heatIndex = 0.0f;
-        private WeatherData _weatherData;
+        private readonly WeatherData _weatherData;
 
         public HeatIndexDisplay(WeatherData weatherData)
         {

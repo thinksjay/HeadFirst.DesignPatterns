@@ -4,8 +4,8 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class Projector
     {
-        private string _description;
-        private DvdPlayer _dvdPlayer;
+        private readonly string _description;
+        private readonly DvdPlayer _dvdPlayer;
 
         public Projector(String description, DvdPlayer dvdPlayer)
         {

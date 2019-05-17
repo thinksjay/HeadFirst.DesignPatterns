@@ -4,14 +4,14 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class HomeTheaterFacade
     {
-        private Amplifier _amp;
-        private Tuner _tuner;
-        private DvdPlayer _dvd;
-        private CdPlayer _cd;
-        private Projector _projector;
-        private TheaterLights _lights;
-        private Screen _screen;
-        private PopcornPopper _popper;
+        private readonly Amplifier _amp;
+        private readonly Tuner _tuner;
+        private readonly DvdPlayer _dvd;
+        private readonly CdPlayer _cd;
+        private readonly Projector _projector;
+        private readonly TheaterLights _lights;
+        private readonly Screen _screen;
+        private readonly PopcornPopper _popper;
 
         public HomeTheaterFacade(Amplifier amp,
                      Tuner tuner,

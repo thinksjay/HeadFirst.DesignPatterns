@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Facade
 {
     public class PopcornPopper
     {
-        private string _description;
+        private readonly string _description;
 
         public PopcornPopper(string description)
         {
