@@ -1,14 +1,13 @@
 using System;
-
 namespace HeadFirst.DesignPatterns.Combining
 {
-    public class MallardDuck : IQuackable
+    public class RubberDuck:IQuackable
     {
         private readonly Observable _observable;
 
-        public MallardDuck()
+        public RubberDuck()
         {
-            _observable = new Observable(this);
+            _observable=new Observable(this);
         }
 
         public void Quack()
@@ -17,19 +16,19 @@ namespace HeadFirst.DesignPatterns.Combining
             NotifyObservers();
         }
 
-        public void RegisterObserver(IObserver observer)
-        {
-            _observable.RegisterObserver(observer);
-        }
-
         public void NotifyObservers()
         {
             _observable.NotifyObservers();
         }
 
+        public void RegisterObserver(IObserver observer)
+        {
+            _observable.RegisterObserver(observer);
+        }
+
         public override string ToString()
         {
-            return "Mallard Duck";
+            return "Rubber Duck";
         }
     }
 }

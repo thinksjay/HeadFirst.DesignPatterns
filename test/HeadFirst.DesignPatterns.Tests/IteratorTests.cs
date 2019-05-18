@@ -16,11 +16,11 @@ namespace HeadFirst.DesignPatterns.Tests
             Waitress waitress = new Waitress(pancakeHouseMenu, dinerMenu, cafeMenu);
 
             waitress.PrintMenu();
-            waitress.printVegetarianMenu();
+            waitress.PrintVegetarianMenu();
 
             Console.WriteLine("\nCustomer asks, is the Hotdog vegetarian?");
             Console.WriteLine("Waitress says: ");
-            if (waitress.isItemVegetarian("Hotdog"))
+            if (waitress.IsItemVegetarian("Hotdog"))
             {
                 Console.WriteLine("Yes");
             }
@@ -30,7 +30,7 @@ namespace HeadFirst.DesignPatterns.Tests
             }
             Console.WriteLine("\nCustomer asks, are the Waffles vegetarian?");
             Console.WriteLine("Waitress says: ");
-            if (waitress.isItemVegetarian("Waffles"))
+            if (waitress.IsItemVegetarian("Waffles"))
             {
                 Console.WriteLine("Yes");
             }

@@ -4,11 +4,11 @@ namespace HeadFirst.DesignPatterns.Combining
 {
     public class DecoyDuck : IQuackable
     {
-        private Observable observable;
+        private readonly Observable _observable;
 
         public DecoyDuck()
         {
-            observable = new Observable(this);
+            _observable = new Observable(this);
         }
 
         public void Quack()
@@ -19,11 +19,11 @@ namespace HeadFirst.DesignPatterns.Combining
 
         public void RegisterObserver(IObserver observer)
         {
-            observable.RegisterObserver(observer);
+            _observable.RegisterObserver(observer);
         }
         public void NotifyObservers()
         {
-            observable.NotifyObservers();
+            _observable.NotifyObservers();
         }
 
         public override string ToString()

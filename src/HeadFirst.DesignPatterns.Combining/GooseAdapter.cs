@@ -1,19 +1,19 @@
-using System;
-
 namespace HeadFirst.DesignPatterns.Combining
 {
-    public class MallardDuck : IQuackable
+    public class GooseAdapter : IQuackable
     {
+        private readonly Goose _goose;
         private readonly Observable _observable;
 
-        public MallardDuck()
+        public GooseAdapter(Goose goose)
         {
+            _goose = goose;
             _observable = new Observable(this);
         }
 
         public void Quack()
         {
-            Console.WriteLine("Quack");
+            _goose.Honk();
             NotifyObservers();
         }
 
@@ -29,7 +29,7 @@ namespace HeadFirst.DesignPatterns.Combining
 
         public override string ToString()
         {
-            return "Mallard Duck";
+            return "Goose pretending to be a Duck";
         }
     }
 }

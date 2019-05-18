@@ -27,5 +27,6 @@
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Iterator\HeadFirst.DesignPatterns.Iterator.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Composite\HeadFirst.DesignPatterns.Composite.csproj" />
     <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.State\HeadFirst.DesignPatterns.State.csproj" />
+    <ProjectReference Include="..\..\src\HeadFirst.DesignPatterns.Combining\HeadFirst.DesignPatterns.Combining.csproj" />
   </ItemGroup>
 </Project>
