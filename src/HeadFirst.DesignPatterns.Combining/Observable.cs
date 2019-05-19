@@ -4,7 +4,7 @@ namespace HeadFirst.DesignPatterns.Combining
 {
     public class Observable : IQuackObservable
     {
-        List<IObserver> observers = new List<IObserver>();
+       private readonly List<IObserver> observers = new List<IObserver>();
 
         private readonly IQuackObservable _duck;
 

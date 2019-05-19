@@ -3,7 +3,7 @@ namespace HeadFirst.DesignPatterns.Combining
 {
     public class Flock : IQuackable
     {
-        List<IQuackable> ducks = new List<IQuackable>();
+       private readonly List<IQuackable> ducks = new List<IQuackable>();
 
         public void Add(IQuackable duck)
         {

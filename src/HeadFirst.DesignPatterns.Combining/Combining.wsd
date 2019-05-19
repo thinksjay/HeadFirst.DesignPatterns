@@ -1,8 +1,269 @@
 @startuml
 title Combining
 namespace HeadFirst.DesignPatterns.Combining{
-    note as CombiningNote
 
+    DuckSimulator --> AbstractDuckFactory
+    DuckSimulator --> IObserver
+    DuckSimulator --> IQuackable
+
+    IQuackable -up-|> IQuackObservable
+
+    AbstractDuckFactory <|-- DuckFactory
+    AbstractDuckFactory <|-- CountingDuckFactory
+
+    IObserver <|.up. Quackologist
+    DuckFactory --> MallardDuck
+    DuckFactory --> RedheadDuck
+    DuckFactory --> DuckCall
+    DuckFactory --> RubberDuck
+    DuckFactory --> DecoyDuck
+
+    CountingDuckFactory --> MallardDuck
+    CountingDuckFactory --> RedheadDuck
+    CountingDuckFactory --> DuckCall
+    CountingDuckFactory --> RubberDuck
+    CountingDuckFactory --> DecoyDuck
+    
+    MallardDuck .up.|> IQuackable
+    RedheadDuck .up.|> IQuackable
+    DuckCall .up.|> IQuackable
+    RubberDuck .up.|> IQuackable
+    GooseAdapter .up.|> IQuackable
+    Flock .up.|> IQuackable
+    QuackCounter .up.|> IQuackable
+
+    IObserver --> Observable
+    MallardDuck -up-> Observable
+    RedheadDuck -up-> Observable
+    DuckCall -up-> Observable
+    RubberDuck -up-> Observable
+    GooseAdapter -up-> Observable
+    Flock -up-> Observable
+    QuackCounter -up-> Observable
+
+    Observable .up.|> IQuackObservable
+    Observable -up-> IQuackObservable
+    
+    GooseAdapter --> Goose
+    
+
+
+    class DuckSimulator{
+
+    }
+
+    abstract class AbstractDuckFactory
+    {
+        + abstract IQuackable CreateMallardDuck();
+        + abstract IQuackable CreateRedheadDuck();
+        + abstract IQuackable CreateDuckCall();
+        + abstract IQuackable CreateRubberDuck();
+    }
+
+    note as AbstractDuckFactoryNote
+    鸭子模拟器使用工厂创建鸭子
     end note
+
+    AbstractDuckFactoryNote .. AbstractDuckFactory
+
+    class DuckFactory
+    {
+        + IQuackable CreateMallardDuck();
+        + IQuackable CreateRedheadDuck();
+        + IQuackable CreateDuckCall();
+        + IQuackable CreateRubberDuck();
+    }
+
+    class CountingDuckFactory
+    {
+        + IQuackable CreateMallardDuck();
+        + IQuackable CreateRedheadDuck();
+        + IQuackable CreateDuckCall();
+        + IQuackable CreateRubberDuck();
+    }
+
+    note as FactoryNote
+    这里有两个不同的工厂，它们产生相同的产品家族。
+    DuckFactory创建鸭子，CountingDuckFactory
+    创建被QuackCounter装饰者包装过的鸭子。
+    end note
+
+    FactoryNote .. CountingDuckFactory
+    FactoryNote .. DuckFactory
+
+    interface IObserver{
+        + Update(IQuackObservable duck);
+    }
+
+    note as IObserverNote
+    如果某一个类实现IObserver,此类
+    就可以观察IQuackable,当Quack()
+    被调用时它会收到通知。
+    end note
+
+    IObserverNote .. IObserver
+
+    class Quackologist
+    {
+        + void Update(IQuackObservable duck);
+    }
+
+    note as QuackologistNote
+    我们只为IQuackable实现一种IObserver,
+    即Quackologist。但任何实现IObserver
+    接口的类都可以观察鸭子，实现一个
+    BirdWatcher(鸟监测器)观察者怎么样？
+    end note
+
+    QuackologistNote .. Quackologist
+
+    interface IQuackObservable
+    {
+        + void RegisterObserver(IObserver observer);
+        + void NotifyObservers();
+    }
+
+    note as IQuackObservableNote
+    IQuackObservable接口有一组方法，
+    任何Observable都必须实现这些方法。
+    end note
+
+    IQuackObservableNote .. IQuackObservable
+
+    interface IQuackable
+    {
+        + void Quack();
+    }
+
+    note as IQuackableNote
+    IQuackable是一个接口，所有具有呱呱叫行为的类，
+    就必须实现这个接口。
+    end note
+
+    IQuackableNote .. IQuackable
+
+    class Observable
+    {
+        - readonly List<IObserver> observers = new List<IObserver>();
+        - readonly IQuackObservable _duck;
+
+        + IReadOnlyList<IObserver> Observers;
+
+        + Observable(IQuackObservable duck);
+
+        + void RegisterObserver(IObserver observer);
+        + void NotifyObservers();
+    }
+    
+    note as ObservableNote
+    每个IQuackable都具备一个Observable实例，
+    用来跟踪它的观察者，而且当呱呱叫响起时通知
+    观察者。
+    end note
+
+    ObservableNote .right. Observable
+
+    class DecoyDuck
+    {
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    } 
+
+    class MallardDuck
+    {
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    }
+
+    class DuckCall
+    {
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    }     
+
+    class RedheadDuck
+    {
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    }
+
+    class RubberDuck
+    {
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    }
+
+    class Flock
+    {
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    } 
+
+    note as FlockNote
+    组合
+    end note
+
+    FlockNote .up. Flock
+
+    class Goose
+    {
+        + void Honk();
+    }
+
+    class GooseAdapter
+    {
+        - readonly Goose _goose;
+
+        + GooseAdapter(Goose goose);
+
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    }
+
+    note as GooseAdapterNote
+    适配器
+    end note
+
+    GooseAdapterNote .up. GooseAdapter
+
+    class QuackCounter
+    {
+        - readonly IQuackable _duck;
+        + static int NumberOfQuacks;
+
+        + QuackCounter(IQuackable duck);
+
+        + void Quack();
+        + void NotifyObservers();
+        + void RegisterObserver(IObserver observer);
+    }
+
+    note as QuackCounterNote
+    装饰者
+    end note
+
+    QuackCounterNote .up. QuackCounter
+
+    note as OtherNote
+    我们有两类IQuackable，一类是鸭子;一类是有鸭叫声的东西，像GooseAdapter
+    、Flock、QuackCounter。其中gooseAdapter包装鹅，让鹅看起来像是IQuackable;
+    Flock是IQuackable的组合;QuackCounter为IQuackable添加行为。
+    end note
+
+    OtherNote .up. GooseAdapter
+    OtherNote .up. Flock
+    OtherNote .up. QuackCounter
+    OtherNote .up. DuckCall
+    OtherNote .up. DecoyDuck
+    OtherNote .up. MallardDuck
+    OtherNote .up. RedheadDuck
+    OtherNote .up. RubberDuck
 }
 @enduml
